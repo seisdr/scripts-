@@ -1,0 +1,29 @@
+#!/bin/bash
+
+LD_LIBRARY_PATH=/system/lib64:/apex/com.android.art\@1/lib64:/system_ext/lib64/ /system/bin/screenrecord   --output-format=h264  - | ffmpeg -re \
+
+-i - \
+
+-vcodec libx264 \
+
+-vf scale=1080:2400 \
+
+-vprofile high \
+
+-preset ultrafast \
+
+-b:v 1M -maxrate 2M -bufsize 2M -pass 1 \
+
+-strict experimental \
+
+-pix_fmt yuv420p \
+
+-tune zerolatency \
+
+-movflags use_metadata_flag \
+
+-movflags empty_moov+default_base_moof+faststart \
+
+-f h264 rtmp://a.rtmp.youtube.com/live2/4fa8-baq9-kv6s-fcub-2uat
+
+#ffplay  -framerate 120  -framedrop -
