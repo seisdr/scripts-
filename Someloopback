@@ -1,0 +1,7 @@
+#!/bin/bash
+
+pactl load-module module-null-sink sink_name=Virtual1
+
+pactl load-module module-loopback source=OpenSL_ES_sink.monitor sink=Virtual1
+
+pactl load-module module-loopback source=Virtual1.monitor sink=OpenSL_ES_sink.monitor
